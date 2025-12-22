@@ -1,76 +1,120 @@
-'use client';
-import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
-import type { Note } from '@/types/note';
+// 'use client';
+// import axios, { type AxiosResponse } from 'axios';
+// import type { Note } from '@/types/note';
+// import { nextServer } from './api/api';
+// import { User } from '@/types/User';
 
-const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN as string;
-const BASE_URL = 'https://notehub-public.goit.study/api';
-
-const api: AxiosInstance = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  },
-});
-
-export interface FetchNotesParams {
-  page?: number;
-  perPage?: number;
-  tagName?: string;
-}
-
-export interface FetchNotesResponse {
-  notes: Note[];
-  totalPages: number;
-}
-
-export interface CreateNotePayload {
-  title: string;
-  content: string;
-  tag: string;
-}
-
-export async function fetchNotes(
-  currentPage: number,
-  search?: string,
-  tagName?: string
-): Promise<FetchNotesResponse> {
-  const getParams = {
-    params: {
-      search,
-      page: currentPage,
-      perPage: 12,
-      tag: tagName,
-    },
-  };
-
-  const { data } = await api.get<FetchNotesResponse>('/notes', getParams);
-
-  return data;
-}
-// export async function getTodos() {
-//   const { data } = await axios.get<Todo[]>(
-//     'https://jsonplaceholder.typicode.com/todos'
-//   );
-//   return data;
-// }
-export async function fetchNoteById(id: string): Promise<Note> {
-  const { data } = await api.get<Note>(`/notes/${id}`);
-  return data;
-}
-// export async function getTodo(todoId: Todo['id']) {
-//   const { data } = await axios.get<Todo>(
-//     `https://jsonplaceholder.typicode.com/todos/${todoId}`
-//   );
-//   return data;
+// export interface FetchNotesParams {
+//   page?: number;
+//   perPage?: number;
+//   tagName?: string;
 // }
 
-export async function createNote(payload: CreateNotePayload): Promise<Note> {
-  const response: AxiosResponse<Note> = await api.post('/notes', payload);
-  return response.data;
-}
+// export interface FetchNotesResponse {
+//   notes: Note[];
+//   totalPages: number;
+// }
 
-export async function deleteNote(id: string): Promise<Note> {
-  const response: AxiosResponse<Note> = await api.delete(`/notes/${id}`);
-  return response.data;
-}
+// export interface CreateNotePayload {
+//   title: string;
+//   content: string;
+//   tag: string;
+// }
+// export type RegisterRequest = {
+//   email: string;
+//   password: string;
+// };
+
+// export async function fetchNotes(
+//   currentPage: number,
+//   search?: string,
+//   tagName?: string
+// ): Promise<FetchNotesResponse> {
+//   const getParams = {
+//     params: {
+//       search,
+//       page: currentPage,
+//       perPage: 12,
+//       tag: tagName,
+//     },
+//   };
+
+//   const { data } = await nextServer.get<FetchNotesResponse>(
+//     '/notes',
+//     getParams
+//   );
+
+//   return data;
+// }
+// // export async function getTodos() {
+// //   const { data } = await axios.get<Todo[]>(
+// //     'https://jsonplaceholder.typicode.com/todos'
+// //   );
+// //   return data;
+// // }
+// export async function fetchNoteById(id: string): Promise<Note> {
+//   const { data } = await nextServer.get<Note>(`/notes/${id}`);
+//   return data;
+// }
+// // export async function getTodo(todoId: Todo['id']) {
+// //   const { data } = await axios.get<Todo>(
+// //     `https://jsonplaceholder.typicode.com/todos/${todoId}`
+// //   );
+// //   return data;
+// // }
+
+// export async function createNote(payload: CreateNotePayload): Promise<Note> {
+//   const response: AxiosResponse<Note> = await nextServer.post(
+//     '/notes',
+//     payload
+//   );
+//   return response.data;
+// }
+
+// export async function deleteNote(id: string): Promise<Note> {
+//   const response: AxiosResponse<Note> = await nextServer.delete(`/notes/${id}`);
+//   return response.data;
+// }
+
+// export const register = async (data: RegisterRequest) => {
+//   const res = await nextServer.post<User>('/auth/register', data);
+//   return res.data;
+// };
+
+// export type LoginRequest = {
+//   email: string;
+//   password: string;
+// };
+
+// export const login = async (data: LoginRequest) => {
+//   const res = await nextServer.post<User>('/auth/login', data);
+//   return res.data;
+// };
+
+// export const logout = async (): Promise<void> => {
+//   const { data } = await nextServer.post('/auth/logout');
+//   return data;
+// };
+
+// type CheckSessionRequest = {
+//   success: boolean;
+// };
+
+// export const checkSession = async () => {
+//   const res = await nextServer.get<CheckSessionRequest>('/auth/session');
+//   return res.data;
+// };
+
+// export const getMe = async () => {
+//   const { data } = await nextServer.get<User>('/users/me');
+//   return data;
+// };
+
+// export type UpdateUserRequest = {
+//   username?: string;
+// };
+
+// export const updateMe = async (payload: UpdateUserRequest) => {
+//   const res = await nextServer.patch<User>('/users/me', payload);
+//   return res.data;
+// };
