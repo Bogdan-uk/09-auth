@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { logout } from '@/lib/api/clientApi';
 export default function AuthNavigation() {
   const router = useRouter();
-  const { user, isAuthenticated, hasHydrated } = useAuthStore();
+  const { user, isAuthenticated } = useAuthStore();
   const clearIsAuthenticated = useAuthStore(
     state => state.clearIsAuthenticated
   );
