@@ -2,7 +2,7 @@
 import axios, { type AxiosResponse } from 'axios';
 import type { Note } from '@/types/note';
 import { nextServer } from './api';
-import { User } from '@/types/User';
+import { User } from '@/types/user';
 
 export interface FetchNotesParams {
   page?: number;
