@@ -25,16 +25,6 @@ export async function checkServerSession() {
   return res;
 }
 
-export async function getServerNoteById(id: string): Promise<Note> {
-  const cookieStore = await cookies();
-  const { data } = await nextServer.get<Note>(`/notes/${id}`, {
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
-  });
-  return data;
-}
-
 export async function fetchNotes(
   currentPage: number,
   search?: string,
